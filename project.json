@@ -1,0 +1,18 @@
+{
+    "id": "ecs_collisions",
+    "type": "application",
+    "value": {
+        "author": "Sander Mertens",
+        "description": "ECS example that demonstrates collision detection",
+        "use": [
+            "reflecs",
+            "reflecs.math",
+            "reflecs.components.transform",
+            "reflecs.components.physics",
+            "reflecs.components.geometry",
+            "reflecs.components.graphics",
+            "reflecs.systems.physics",
+            "reflecs.systems.sdl2"
+        ]
+    }
+}

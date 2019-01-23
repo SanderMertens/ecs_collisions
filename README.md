@@ -42,4 +42,4 @@ In the example, the Collision system subscribes for EcsCollision2D components, a
 
 The physics system will generate one collision entity for every two entities that collide. After the frame is processed, collision entities are automatically cleaned up. Therefore, an application has only one chance to catch the collision.
 
-Note that the physics systems can be used in non-GUI applications, by simply removing the SDL2 dependency from the project.
+Note that the physics systems can be used in non-GUI applications, by simply not adding the SDL2 dependency to a project.

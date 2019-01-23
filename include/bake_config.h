@@ -19,7 +19,6 @@
 
 /* Headers of public dependencies */
 #include <reflecs>
-#include <reflecs.math>
 #include <reflecs.components.transform>
 #include <reflecs.components.physics>
 #include <reflecs.components.geometry>

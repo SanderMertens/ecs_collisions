@@ -1,7 +1,5 @@
 #include <include/ecs_collisions.h>
-#include <math.h>
 
-static
 void Collision(EcsRows *rows) {
     EcsEntity EcsColor_h = ecs_component(rows, 1);
     void *row;
@@ -12,12 +10,10 @@ void Collision(EcsRows *rows) {
     }
 }
 
-static
 void ResetColor(EcsRows *rows) {
     void *row;
     for (row = rows->first; row < rows->last; row = ecs_next(rows, row)) {
-        EcsColor *color = ecs_data(rows, row, 0);
-        *color = (EcsColor){255, 255, 255, 255};
+        *(EcsColor*)ecs_data(rows, row, 0) = (EcsColor){255, 255, 255, 255};
     }
 }
 
@@ -39,7 +35,7 @@ int main(int argc, char *argv[]) {
     ecs_set(world, Square_h, EcsSquare, {.size = 24});
 
     /* Systems that set color based on collision */
-    ECS_SYSTEM(world, ResetColor, EcsPreFrame, EcsColor);
+    ECS_SYSTEM(world, ResetColor, EcsOnFrame, EcsColor);
     ECS_SYSTEM(world, Collision, EcsOnFrame, EcsCollision2D, ID.EcsColor);
 
     /* Drawing canvas */
@@ -54,43 +50,21 @@ int main(int argc, char *argv[]) {
     ecs_set(world, e, EcsAngularSpeed, {.value = 1.0});
     ecs_add(world, e, EcsCollider_h);
 
-    e = ecs_new(world, Circle_h);
-    ecs_set(world, e, EcsPosition2D, {-100, 100});
-    ecs_add(world, e, canvas);
+    EcsPosition2D cpos[] = {{-100, 100}, {100, 100}, {-100, -100}, {100, -100}};
+    EcsPosition2D spos[] = {{0, 100}, {0, -100}, {-100, 0}, {100, 0}};
+    int i;
+    for (i = 0; i < 4; i ++) {
+        e = ecs_new(world, Circle_h);
+        ecs_set(world, e, EcsPosition2D, {cpos[i].x, cpos[i].y});
+        ecs_add(world, e, canvas);
 
-    e = ecs_new(world, Circle_h);
-    ecs_set(world, e, EcsPosition2D, {100, 100});
-    ecs_add(world, e, canvas);
-
-    e = ecs_new(world, Square_h);
-    ecs_set(world, e, EcsPosition2D, {0, 100});
-    ecs_add(world, e, canvas);
-
-    e = ecs_new(world, Circle_h);
-    ecs_set(world, e, EcsPosition2D, {-100, -100});
-    ecs_add(world, e, canvas);
-
-    e = ecs_new(world, Circle_h);
-    ecs_set(world, e, EcsPosition2D, {100, -100});
-    ecs_add(world, e, canvas);
-
-    e = ecs_new(world, Square_h);
-    ecs_set(world, e, EcsPosition2D, {0, -100});
-    ecs_add(world, e, canvas);
-
-    e = ecs_new(world, Square_h);
-    ecs_set(world, e, EcsPosition2D, {-100, 0});
-    ecs_add(world, e, canvas);
-
-    e = ecs_new(world, Square_h);
-    ecs_set(world, e, EcsPosition2D, {100, 0});
-    ecs_add(world, e, canvas);
+        e = ecs_new(world, Square_h);
+        ecs_set(world, e, EcsPosition2D, {spos[i].x, spos[i].y});
+        ecs_add(world, e, canvas);
+    }
 
     /* Main loop */
     ecs_set_target_fps(world, 60);
-
     while (ecs_progress(world, 0));
-
-    /* Cleanup */
     return ecs_fini(world);
 }

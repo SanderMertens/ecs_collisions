@@ -38,7 +38,7 @@ For the physics engine to detect collisions, objects must have a collider compon
 
 Whenever the physics engine detects a collision, it will create a new entity with the `EcsCollision2D` component. This component contains details of the collision, like the collision vector, how much the entities have collided into each other, and which entities it concerns. To run logic when a collision is detected, an application can simply create a system that subscribes for the EcsCollision2D component.
 
-In the example, the Collision system subscribes for EcsCollision2D components, and colors collided entities red. The ResetColor system resets the color to white. Note how ResetColor is defined _before_ Collision. This is important, as system declaration order determines in which order they will be executed.
+In the example, the SetColor system subscribes for EcsCollision2D components, and colors collided entities red. The ResetColor system resets the color to white. Note how ResetColor is defined _before_ SetColor. This is important, as system declaration order determines in which order they will be executed.
 
 The physics system will generate one collision entity for every two entities that collide. After the frame is processed, collision entities are automatically cleaned up. Therefore, an application has only one chance to catch the collision.
 

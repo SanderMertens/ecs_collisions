@@ -32,9 +32,9 @@ bake run ecs_collisions
 ```
 
 ## Implementation
-This example demonstrates basic usage of the Reflecs 2D physics engine. A number of circle, square and rectangle objects are created of which the rectangle is given angular momentum, making it spin. The spinning rectangle collides with the other entities, which triggers collision events.
+This example demonstrates basic usage of the Reflecs 2D physics engine. A number of circle, square and rectangle objects are created. The rectangle is given angular momentum which makes it spin. The spinning rectangle collides with the other entities, which triggers collision events.
 
-For the physics engine to detect collisions, objects must have a collider component. Reflecs physics supports two types of colliders, Circle and Polygon. In this example we do not manually create colliders, but instead let the physics framework derive the colliders from the geometry data. We can do this by adding the `EcsCollider` component. This component does not actually contain collider data, but rather marks the object as something for which the physics framework needs to add a collider.
+For the physics engine to detect collisions, objects must have a collider component. Reflecs physics supports two types of colliders, Circle and Polygon. In this example we do not manually create colliders, but instead let the physics framework derive the colliders from the geometry data. We can do this by adding the `EcsCollider` component. This component does not actually contain collider data, but rather tells the physics engine that a collider must be added to this entity.
 
 Whenever the physics engine detects a collision, it will create a new entity with the `EcsCollision2D` component. This component contains details of the collision, like the collision vector, how much the entities have collided into each other, and which entities it concerns. To run logic when a collision is detected, an application can simply create a system that subscribes for the `EcsCollision2D` component.
 

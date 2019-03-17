@@ -18,13 +18,15 @@
 #define ECS_COLLISIONS_BAKE_CONFIG_H
 
 /* Headers of public dependencies */
-#include <reflecs>
-#include <reflecs.components.transform>
-#include <reflecs.components.physics>
-#include <reflecs.components.geometry>
-#include <reflecs.components.graphics>
-#include <reflecs.systems.physics>
-#include <reflecs.systems.sdl2>
+#include <flecs>
+#include <flecs.components.transform>
+#include <flecs.components.physics>
+#include <flecs.components.geometry>
+#include <flecs.components.graphics>
+#include <flecs.systems.physics>
+#include <flecs.systems.sdl2>
+#include <flecs.systems.civetweb>
+#include <flecs.systems.admin>
 
 /* Headers of private dependencies */
 #ifdef ECS_COLLISIONS_IMPL

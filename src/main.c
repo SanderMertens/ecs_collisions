@@ -13,7 +13,7 @@ void SetColor(EcsRows *rows) {
 
 void ResetColor(EcsRows *rows) {
     /* Little trick to ensure the color is only set if entity owns EcsColor:
-     * ecs_column_test returns NULL if the column is a shared comonent. */
+     * ecs_column_test returns NULL if the column is a shared component. */
     EcsColor *color = ecs_column_test(rows, EcsColor, 1);
 
     for (int i = rows->begin; color && i < rows->end; i ++) {

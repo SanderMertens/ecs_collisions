@@ -1,3 +1,4 @@
-
-bin/x64-darwin-debug/ecs_collisions
-*.o
+.bake_cache
+.DS_Store
+.vscode
+bin

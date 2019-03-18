@@ -3,6 +3,7 @@
 void SetColor(EcsRows *rows) {
     EcsCollision2D *collision = ecs_column(rows, EcsCollision2D, 1);
     EcsType TEcsColor = ecs_column_type(rows, 2);
+
     for (int i = rows->begin; i < rows->end; i ++) {
         ecs_set(rows->world, collision[i].entity_1, EcsColor, {255, 50, 100, 255});
         ecs_set(rows->world, collision[i].entity_2, EcsColor, {255, 50, 100, 255});
@@ -10,8 +11,8 @@ void SetColor(EcsRows *rows) {
 }
 
 void ResetColor(EcsRows *rows) {
-    EcsColor *color = ecs_column(rows, EcsColor, 1);
-    for (int i = rows->begin; i < rows->end; i ++) {
+    EcsColor *color = ecs_column_test(rows, EcsColor, 1);
+    for (int i = rows->begin; color && i < rows->end; i ++) {
         color[i] = (EcsColor){color[i].r * 0.97, 50, 100, 255};
     }
 }
@@ -27,8 +28,10 @@ int main(int argc, char *argv[]) {
     ECS_IMPORT(world, EcsSystemsSdl2, ECS_2D);         /* Rendering */
 
     /* Define reusable prefabs for circle and square shapes */
-    ECS_PREFAB(world, Circle, EcsCircle, EcsCollider);
-    ECS_PREFAB(world, Square, EcsSquare, EcsCollider);
+    ECS_PREFAB(world, Shape, EcsColor, EcsCollider);
+    ECS_PREFAB(world, Circle, Shape, EcsCircle);
+    ECS_PREFAB(world, Square, Shape, EcsSquare);
+    ecs_set(world, Shape, EcsColor, {0, 50, 100, 255});
     ecs_set(world, Circle, EcsCircle, {.radius = 24});
     ecs_set(world, Square, EcsSquare, {.size = 24});
 
@@ -37,9 +40,7 @@ int main(int argc, char *argv[]) {
     ECS_SYSTEM(world, SetColor, EcsOnFrame, EcsCollision2D, ID.EcsColor);
 
     /* Create canvas (used by SDL to create window) */
-    ecs_set(world, 0, EcsCanvas2D, {
-        .window = {.width = 800, .height = 600}
-    });
+    ecs_set(world, 0, EcsCanvas2D, { .window = {.width = 800, .height = 600} });
 
     /* Create shapes */
     EcsEntity e = ecs_set(world, 0, EcsPosition2D, {0, 0});

@@ -4,7 +4,7 @@ void SetColor(EcsRows *rows) {
     EcsCollision2D *collision = ecs_column(rows, EcsCollision2D, 1);
     EcsType TEcsColor = ecs_column_type(rows, 2);
 
-    for (int i = rows->begin; i < rows->end; i ++) {
+    for (int i = 0; i < rows->count; i ++) {
         /* Set or override (if collided for the first time) the entity color */
         ecs_set(rows->world, collision[i].entity_1, EcsColor, {255, 50, 100, 255});
         ecs_set(rows->world, collision[i].entity_2, EcsColor, {255, 50, 100, 255});
@@ -16,7 +16,7 @@ void ResetColor(EcsRows *rows) {
      * ecs_column_test returns NULL if the column is a shared component. */
     EcsColor *color = ecs_column_test(rows, EcsColor, 1);
 
-    for (int i = rows->begin; color && i < rows->end; i ++) {
+    for (int i = 0; color && i < rows->count; i ++) {
         color[i] = (EcsColor){color[i].r * 0.97, 50, 100, 255}; /* Gradually fade to blue */
     }
 }

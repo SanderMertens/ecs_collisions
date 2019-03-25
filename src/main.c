@@ -1,6 +1,6 @@
 #include <include/ecs_collisions.h>
 
-void SetColor(EcsRows *rows) {
+void SetColor(ecs_rows_t *rows) {
     EcsCollision2D *collision = ecs_column(rows, EcsCollision2D, 1);
     EcsType TEcsColor = ecs_column_type(rows, 2);
 
@@ -11,7 +11,7 @@ void SetColor(EcsRows *rows) {
     }
 }
 
-void ResetColor(EcsRows *rows) {
+void ResetColor(ecs_rows_t *rows) {
     /* Little trick to ensure the color is only set if entity owns EcsColor:
      * ecs_column_test returns NULL if the column is a shared component. */
     EcsColor *color = ecs_column_test(rows, EcsColor, 1);
@@ -22,7 +22,7 @@ void ResetColor(EcsRows *rows) {
 }
 
 int main(int argc, char *argv[]) {
-    EcsWorld *world = ecs_init();
+    ecs_world_t *world = ecs_init();
 
     ECS_IMPORT(world, EcsComponentsGraphics, ECS_2D);  /* EcsCanvas2D, EcsColor */
     ECS_IMPORT(world, EcsComponentsTransform, ECS_2D); /* EcsPosition2D */

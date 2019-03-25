@@ -2,7 +2,7 @@
 
 void SetColor(ecs_rows_t *rows) {
     EcsCollision2D *collision = ecs_column(rows, EcsCollision2D, 1);
-    EcsType TEcsColor = ecs_column_type(rows, 2);
+    ecs_type_t TEcsColor = ecs_column_type(rows, 2);
 
     for (int i = 0; i < rows->count; i ++) {
         /* Set or override (if collided for the first time) the entity color */
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
     ecs_set(world, 0, EcsCanvas2D, { .window = {.width = 800, .height = 600} });
 
     /* Create rotating rectangle and array of shapes it will collide with */
-    EcsEntity e = ecs_set(world, 0, EcsPosition2D, {0, 0});
+    ecs_entity_t e = ecs_set(world, 0, EcsPosition2D, {0, 0});
     ecs_set(world, e, EcsRectangle, {.width = 250, .height = 12});
     ecs_set(world, e, EcsAngularSpeed, {.value = 1.5});
     ecs_add(world, e, EcsCollider);

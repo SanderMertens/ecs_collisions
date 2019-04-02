@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
     ecs_set(world, Square, EcsSquare, {.size = 24});
 
     /* Systems that implement logic for coloring entities */
-    ECS_SYSTEM(world, ResetColor, EcsOnFrame, EcsColor);
+    ECS_SYSTEM(world, ResetColor, EcsOnUpdate, EcsColor);
     ECS_SYSTEM(world, SetColor, EcsOnSet, EcsCollision2D, ID.EcsColor);
 
     /* Create canvas (used by SDL to create window) */

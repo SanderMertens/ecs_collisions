@@ -24,12 +24,12 @@ void ResetColor(ecs_rows_t *rows) {
 int main(int argc, char *argv[]) {
     ecs_world_t *world = ecs_init();
 
-    ECS_IMPORT(world, EcsComponentsGraphics, ECS_2D);  /* EcsCanvas2D, EcsColor */
-    ECS_IMPORT(world, EcsComponentsTransform, ECS_2D); /* EcsPosition2D */
-    ECS_IMPORT(world, EcsComponentsPhysics, ECS_2D);   /* EcsAngularSpeed */
-    ECS_IMPORT(world, EcsComponentsGeometry, ECS_2D);  /* EcsCircle, EcsSquare, EcsRectangle */
-    ECS_IMPORT(world, EcsSystemsPhysics, ECS_2D);      /* Collision detection, movement */
-    ECS_IMPORT(world, EcsSystemsSdl2, ECS_2D);         /* Rendering */
+    ECS_IMPORT(world, FlecsComponentsGraphics, ECS_2D);  /* EcsCanvas2D, EcsColor */
+    ECS_IMPORT(world, FlecsComponentsTransform, ECS_2D); /* EcsPosition2D */
+    ECS_IMPORT(world, FlecsComponentsPhysics, ECS_2D);   /* EcsAngularSpeed */
+    ECS_IMPORT(world, FlecsComponentsGeometry, ECS_2D);  /* EcsCircle, EcsSquare, EcsRectangle */
+    ECS_IMPORT(world, FlecsSystemsPhysics, ECS_2D);      /* Collision detection, movement */
+    ECS_IMPORT(world, FlecsSystemsSdl2, ECS_2D);         /* Rendering */
 
     /* Define prefabs for collidable circles and squares with a color */
     ECS_PREFAB(world, Shape, EcsColor, EcsCollider);

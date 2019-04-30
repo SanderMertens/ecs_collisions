@@ -22,7 +22,7 @@ void ResetColor(ecs_rows_t *rows) {
 }
 
 int main(int argc, char *argv[]) {
-    ecs_world_t *world = ecs_init();
+    ecs_world_t *world = ecs_init_w_args(argc, argv);
 
     ECS_IMPORT(world, FlecsComponentsGraphics, ECS_2D);  /* EcsCanvas2D, EcsColor */
     ECS_IMPORT(world, FlecsComponentsTransform, ECS_2D); /* EcsPosition2D */

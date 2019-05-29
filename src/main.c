@@ -1,4 +1,4 @@
-#include <include/ecs_collisions.h>
+#include <ecs_collisions.h>
 
 void SetColor(ecs_rows_t *rows) {
     EcsCollision2D *collision = ecs_column(rows, EcsCollision2D, 1);

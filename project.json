@@ -14,6 +14,12 @@
             "flecs.systems.sdl2",
             "flecs.systems.civetweb",
             "flecs.systems.admin"
-        ]
+        ],
+        "use-bundle": ["flecs.hub:default"]
+    },
+    "bundle": {
+        "repositories": {
+            "flecs.hub": "https://github.com/flecs-hub/flecs-hub"
+        }
     }
 }
